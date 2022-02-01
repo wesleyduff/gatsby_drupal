@@ -1,0 +1,22 @@
+{
+  "name": "gatsby_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"Hello World\" && exit 1 ",
+    "docker-build": "node ./scripts/docker_build.js",
+    "docker-run": "node ./scripts/docker_run.js",
+    "docker-stop": "node ./scripts/docker_stop.js",
+    "docker-start": "node ./scripts/docker_start.js",
+    "docker-refresh": "npm run docker-teardown && npm run docker-build",
+    "docker-teardown": "node ./scripts/docker_teardown.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chalk": "^5.0.0",
+    "shelljs": "^0.8.5"
+  }
+}
