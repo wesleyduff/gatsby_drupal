@@ -1,0 +1,39 @@
+name: gatsby_server
+services:
+  gatsbyServer:
+    type: node:14
+    webroot: server
+    ssl: true
+    overrides:
+      volumes:
+        - ./server:/app
+    build:
+      - yarn global add gatsby-cli
+      - gatsby --version
+      - gatsby --help
+      - rm -rf node_modules && yarn
+    command: gatsby develop --host 0.0.0.0 --port 80
+  appserver_nginx:
+    ssl: true
+    sslExpose: true
+    type: nginx
+proxy:
+  gatsbyServer:
+    - server.gatsby.lndo.site
+events:
+  post-start:
+    - gatsbyServer: echo "Building the Gatsby site from Drupal."
+    - gatsbyServer: cd server && gatsby build
+tooling:
+  yarn:
+    service: appserver
+  npm:
+    cmd: Nope, try `lando yarn` instead.
+    service: appserver
+  node:
+    service: appserver
+  gatsby:
+    service: appserver
+  gatsby:start:
+    cmd: gatsby develop --host 0.0.0.0 --port 80
+    service: appserver
