@@ -1,54 +1,54 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Headless Drupal using Gatsby for a JAM Stack Architecture Approach
 
-## 🚀 Quick start
+The basics :
+- Lando:
+  - The main piece of software used to orchestrate your local dev environment
+  - Can be used to deploy code to different environments
+  - Abstration from Docker Comppose
+  - Builds and manages your docker containers
+  - Provides the ability execute commands within the docker containers
+- Drupal:
+  - Drupal ver. 9.3
+  - Used only as the backend content management software
+  - Can be hosted in house (internally)
+  - Exposes a JSON API to be consumed
+- React
+  - Components 
+  - Pages
+  - etc..
+- Gatsby
+  - Build tool
+  - Queries the Drupal JSON API during the build process to create static assets
+  - Used by React to generate pages and components
+  - Supplies the Live Preview ability via the Gatsby Dev Server
+- GraphQL
+  - Gatsby provides a graphQL playground to view and test graph queries before you write your code
+  - This can be found here : [https://gatsby.server.lndo.site/___graphql](https://gatsby.server.lndo.site/___graphql)
+- Nginx
+  - Use to route traffic to the gatsby/drupal site
+  - Allows connection to the front-end
+  - Allows Drupal to be exposed for JSON API connections
 
-1.  **Create a Gatsby site.**
+## Run Locally
+1. Install lando if you have not done so 
+   1. Will install Docker if not already installed
+2. lando commands as follows
+- lando start
+  - Might see some errors due to drupal content not being available. That is ok. We have to install the database
+- lando db-import <path to sql gz file>
+- lando gatsbyBuild
+- lando deployGatsby
+- lando gatsbyDevServerStart
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+## Make changes on machine w/o lando
+This will require updates to your gatsby config
+1. Make changes on gatsby server (./server)
+2. Install via `yarn add global gatsby-cli && yarn install && gatsby develop`
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+## Make changes using lando environment (prefered)
+1. Make changes on gatsby server (./server)
+- lando gatsbyBuild
+- lando deployGatsby
+- view changes on "http://gatsbydrupal.lgd.lndo.site/"
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
-
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
-
-3.  **Open the code and start customizing!**
-
-    Your site is now running at http://localhost:8000!
-
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+## View and test GraphQL queries from the Drupal JSON API

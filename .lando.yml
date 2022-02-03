@@ -14,15 +14,18 @@ services:
       - cd CMS && composer install
   gatsbyServer:
     type: node:14
-    port: 8000
     ssl: true
+    overrides:
+      volumes:
+        - ./server:/app
+      ports:
+        - '8000'
     globals:
       gatsby-cli: "2.19.3"
       yarn: "1.22.17"
     run:
       - echo "Installing Gatsby with yarn."
-      - cd server && yarn install
-    cmd: cd server && gatsby develop --host 0.0.0.0
+      - yarn install
 
   appserver_nginx:
     ssl: true
@@ -39,17 +42,18 @@ services:
       user: admin
       password: admin
       database: drupal
-
-events:
-  post-start:
-    - gatsbyServer: echo "Building the Gatsby site from Drupal."
-    - gatsbyServer: cd server && gatsby build
-    - gatsbyServer: rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
-    - gatsbyServer: cd server && GATSBY_GRAPHQL_IDE=playground gatsby develop
+# builds gatsby on lando start but is not needed because database is not yet ready..
+# Use this if gatsby is on its own and not part of a lando build w/ drupal
+#events:
+#  post-start:
+#    - gatsbyServer: echo "Building the Gatsby site from Drupal.  --- pending"
+#    - gatsbyServer: gatsby build
+#    - gatsbyServer: rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
+#    - gatsbyServer: gatsby develop --host 0.0.0.0
 
 proxy:
   gatsbyServer:
-    - gatsby.graph.lndo.site:8000
+    - gatsby.server.lndo.site:8000
   appserver_nginx:
     - drupal.lgd.lndo.site
     - gatsbydrupal.lgd.lndo.site
@@ -64,7 +68,16 @@ tooling:
     service: gatsbyServer
   gatsby:
     service: gatsbyServer
-  gatsby:build:
-    cmd: gatsby build && cd ../ && rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
-  gatsby:start:
+  gatsbyBuild:
+    service: gatsbyServer
+    user: root
+    description: runs gatsby build and copies files to gatsbydrupal
+    cmd: gatsby build
+  deployGatsby:
+    service: appserver_nginx
+    description: move files from gatsby build over to gatsbydrupal for deployment
+    cmd: rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
+  gatsbyDevServerStart:
+    service: gatsbyServer
+    description: start the gatsby dev server
     cmd: gatsby develop --host 0.0.0.0

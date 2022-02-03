@@ -1,10 +1,10 @@
 var plugins = [{
       name: 'gatsby-plugin-react-helmet',
-      plugin: require('/app/server/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
+      plugin: require('/app/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
     },{
       name: 'gatsby-plugin-sitemap',
-      plugin: require('/app/server/node_modules/gatsby-plugin-sitemap/gatsby-ssr'),
+      plugin: require('/app/node_modules/gatsby-plugin-sitemap/gatsby-ssr'),
       options: {"plugins":[],"output":"/sitemap","createLinkInHead":true,"entryLimit":45000,"query":"{ site { siteMetadata { siteUrl } } allSitePage { nodes { path } } }","excludes":[]},
     }]
 /* global plugins */

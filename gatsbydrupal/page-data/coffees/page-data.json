@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-pages-coffees-js",
     "path": "/coffees/",
-    "result": {"data":{"allNodeCoffee":{"edges":[{"node":{"id":"96a3278c-69ce-5523-b38f-ce920af902b1","title":"Starbucks","body":{"value":"<p>Great coffee</p>\r\n","format":"basic_html","processed":"<p>Great coffee</p>\n","summary":""}}}]}},"pageContext":{}},
+    "result": {"data":{"allNodeCoffee":{"edges":[{"node":{"id":"7ed05dbd-dde1-524b-8978-72a6fb888da7","title":"Starbucks","body":{"value":"<p>This is coffee</p>\r\n","format":"basic_html","processed":"<p>This is coffee</p>\n","summary":""}}},{"node":{"id":"ea6cfc0b-927d-595e-aa9e-a8cf011b5c3d","title":"Crow Foot","body":{"value":"<p>Best coffee</p>\r\n","format":"basic_html","processed":"<p>Best coffee</p>\n","summary":""}}}]}},"pageContext":{}},
     "staticQueryHashes": []}
