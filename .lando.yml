@@ -1,39 +1,70 @@
-name: gatsby_server
+name: lando-gatsby-drupal
+
+recipe: drupal9
+config:
+  via: nginx
+  webroot: CMS
+  drush: false
+  xdebug: false
+  composer_version: '2.0.7'
+
+proxy:
+  gatsbyServer:
+    - gatsby.graph.lndo.site
+  appserver_nginx:
+    - drupal.lgd.lndo.site
+    - gatsbydrupal.lgd.lndo.site
+
 services:
+  appserver:
+    build:
+      - cd CMS && composer install
   gatsbyServer:
     type: node:14
     webroot: server
     ssl: true
-    overrides:
-      volumes:
-        - ./server:/app
-    build:
-      - yarn global add gatsby-cli
-      - gatsby --version
-      - gatsby --help
-      - rm -rf node_modules && yarn
-    command: gatsby develop --host 0.0.0.0 --port 80
+   # overrides:
+   #   volumes:
+   #     - ./server:/app
+    globals:
+      gatsby-cli: "2.19.3"
+      yarn: "1.22.17"
+    run:
+      - echo "Installing Gatsby with yarn."
+      - cd server && yarn install
   appserver_nginx:
     ssl: true
     sslExpose: true
     type: nginx
-proxy:
-  gatsbyServer:
-    - server.gatsby.lndo.site
+    build_as_root:
+      - cp /app/conf/nginx/drupal.lgd.lndo.site.conf /opt/bitnami/nginx/conf/vhosts/.
+      - cp /app/conf/nginx/gatsbydrupal.lgd.lndo.site.conf /opt/bitnami/nginx/conf/vhosts/.
+  pma:
+    type: phpmyadmin:4.6
+  database:
+    type: mysql:5.7
+    creds:
+      user: admin
+      password: admin
+      database: drupal
+
 events:
   post-start:
     - gatsbyServer: echo "Building the Gatsby site from Drupal."
     - gatsbyServer: cd server && gatsby build
+    - gatsbyServer: rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
+    - gatsbyServer: cd server && GATSBY_GRAPHQL_IDE=playground gatsby develop --host 0.0.0.0 --port 80
 tooling:
   yarn:
-    service: appserver
+    service: gatsbyServer
   npm:
     cmd: Nope, try `lando yarn` instead.
-    service: appserver
+    service: gatsbyServer
   node:
-    service: appserver
+    service: gatsbyServer
   gatsby:
-    service: appserver
+    service: gatsbyServer
+  gatsby:build:
+    cmd: gatsby build && cd ../ && rm -rf gatsbydrupal/* && cp -R server/public/* gatsbydrupal
   gatsby:start:
-    cmd: gatsby develop --host 0.0.0.0 --port 80
-    service: appserver
+    cmd: gatsby develop --host 0.0.0.0

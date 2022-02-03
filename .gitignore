@@ -5,4 +5,9 @@ idea/
 
 .DS_store
 
+/sql
+
+server/public
+
+
 

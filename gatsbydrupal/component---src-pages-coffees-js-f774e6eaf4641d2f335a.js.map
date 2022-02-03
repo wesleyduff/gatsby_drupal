@@ -1,0 +1,1 @@
+{"version":3,"file":"component---src-pages-coffees-js-f774e6eaf4641d2f335a.js","mappings":"oHAMA,UALoB,kBAChB,2BACI","sources":["webpack://site/./src/pages/coffees.js"],"sourcesContent":["import React from \"react\"\nconst CoffeesPage = () => (\n    <div>\n        <h1>Different types of coffee</h1>\n    </div>\n)\nexport default CoffeesPage"],"names":[],"sourceRoot":""}
