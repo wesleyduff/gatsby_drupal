@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-pages-coffees-js",
     "path": "/coffees/",
-    "result": {"pageContext":{}},
+    "result": {"data":{"allNodeCoffee":{"edges":[{"node":{"id":"96a3278c-69ce-5523-b38f-ce920af902b1","title":"Starbucks","body":{"value":"<p>Great coffee</p>\r\n","format":"basic_html","processed":"<p>Great coffee</p>\n","summary":""}}}]}},"pageContext":{}},
     "staticQueryHashes": []}

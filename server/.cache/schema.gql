@@ -1,0 +1,867 @@
+### Type definitions saved at 2022-02-03T07:29:24.586Z ###
+
+type File implements Node @dontInfer {
+  sourceInstanceName: String!
+  absolutePath: String!
+  relativePath: String!
+  extension: String!
+  size: Int!
+  prettySize: String!
+  modifiedTime: Date! @dateformat
+  accessTime: Date! @dateformat
+  changeTime: Date! @dateformat
+  birthTime: Date! @dateformat
+  root: String!
+  dir: String!
+  base: String!
+  ext: String!
+  name: String!
+  relativeDirectory: String!
+  dev: Int!
+  mode: Int!
+  nlink: Int!
+  uid: Int!
+  gid: Int!
+  rdev: Int!
+  ino: Float!
+  atimeMs: Float!
+  mtimeMs: Float!
+  ctimeMs: Float!
+  atime: Date! @dateformat
+  mtime: Date! @dateformat
+  ctime: Date! @dateformat
+  birthtime: Date @deprecated(reason: "Use `birthTime` instead")
+  birthtimeMs: Float @deprecated(reason: "Use `birthTime` instead")
+  blksize: Int
+  blocks: Int
+  url: String
+}
+
+type Directory implements Node @dontInfer {
+  sourceInstanceName: String!
+  absolutePath: String!
+  relativePath: String!
+  extension: String!
+  size: Int!
+  prettySize: String!
+  modifiedTime: Date! @dateformat
+  accessTime: Date! @dateformat
+  changeTime: Date! @dateformat
+  birthTime: Date! @dateformat
+  root: String!
+  dir: String!
+  base: String!
+  ext: String!
+  name: String!
+  relativeDirectory: String!
+  dev: Int!
+  mode: Int!
+  nlink: Int!
+  uid: Int!
+  gid: Int!
+  rdev: Int!
+  ino: Float!
+  atimeMs: Float!
+  mtimeMs: Float!
+  ctimeMs: Float!
+  atime: Date! @dateformat
+  mtime: Date! @dateformat
+  ctime: Date! @dateformat
+  birthtime: Date @deprecated(reason: "Use `birthTime` instead")
+  birthtimeMs: Float @deprecated(reason: "Use `birthTime` instead")
+}
+
+type Site implements Node @dontInfer {
+  buildTime: Date @dateformat
+  siteMetadata: SiteSiteMetadata
+  polyfill: Boolean
+  pathPrefix: String
+  jsxRuntime: String
+}
+
+type SiteSiteMetadata {
+  title: String
+  description: String
+  siteUrl: String
+}
+
+type SiteFunction implements Node @dontInfer {
+  functionRoute: String!
+  pluginName: String!
+  originalAbsoluteFilePath: String!
+  originalRelativeFilePath: String!
+  relativeCompiledFilePath: String!
+  absoluteCompiledFilePath: String!
+  matchPath: String
+}
+
+type SitePage implements Node @dontInfer {
+  path: String!
+  component: String!
+  internalComponentName: String!
+  componentChunkName: String!
+  matchPath: String
+  pageContext: JSON @proxy(from: "context", fromNode: false)
+  pluginCreator: SitePlugin @link(by: "id", from: "pluginCreatorId")
+}
+
+type SitePlugin implements Node @dontInfer {
+  resolve: String
+  name: String
+  version: String
+  nodeAPIs: [String]
+  browserAPIs: [String]
+  ssrAPIs: [String]
+  pluginFilepath: String
+  pluginOptions: JSON
+  packageJson: JSON
+}
+
+type SiteBuildMetadata implements Node @dontInfer {
+  buildTime: Date @dateformat
+}
+
+type user__user implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  display_name: String
+  relationships: user__userRelationships
+}
+
+type taxonomy_term__tags implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__tid: Int
+  drupal_internal__revision_id: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  name: String
+  weight: Int
+  changed: Date @dateformat
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  path: taxonomy_term__tagsPath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  content_translation_created: Date @dateformat
+  relationships: taxonomy_term__tagsRelationships
+  vid: taxonomy_term__tagsVid
+  content_translation_uid: taxonomy_term__tagsContent_translation_uid
+}
+
+type taxonomy_term__recipe_category implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__tid: Int
+  drupal_internal__revision_id: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  name: String
+  weight: Int
+  changed: Date @dateformat
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  path: taxonomy_term__recipe_categoryPath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  content_translation_created: Date @dateformat
+  relationships: taxonomy_term__recipe_categoryRelationships
+  vid: taxonomy_term__recipe_categoryVid
+  content_translation_uid: taxonomy_term__recipe_categoryContent_translation_uid
+}
+
+type search_page__search_page implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  langcode: String
+  status: Boolean
+  dependencies: search_page__search_pageDependencies
+  drupal_internal__id: String
+  label: String
+  path: String
+  weight: Int
+  plugin: String
+}
+
+type node_type__node_type implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  langcode: String
+  status: Boolean
+  dependencies: node_type__node_typeDependencies
+  name: String
+  drupal_internal__type: String
+  description: String
+  help: String
+  new_revision: Boolean
+  preview_mode: Int
+  display_submitted: Boolean
+  relationships: node_type__node_typeRelationships
+  third_party_settings: node_type__node_typeThird_party_settings
+}
+
+type node__recipe implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__nid: Int
+  drupal_internal__vid: Int
+  langcode: String
+  revision_timestamp: Date @dateformat
+  status: Boolean
+  title: String
+  created: Date @dateformat
+  changed: Date @dateformat
+  promote: Boolean
+  sticky: Boolean
+  default_langcode: Boolean
+  moderation_state: String
+  path: node__recipePath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  field_cooking_time: Int
+  field_difficulty: String
+  field_ingredients: [String]
+  field_number_of_servings: Int
+  field_preparation_time: Int
+  field_recipe_instruction: node__recipeField_recipe_instruction
+  field_summary: node__recipeField_summary
+  relationships: node__recipeRelationships
+  node_type: node__recipeNode_type
+  revision_uid: node__recipeRevision_uid
+  uid: node__recipeUid
+  field_media_image: node__recipeField_media_image
+  field_recipe_category: [node__recipeField_recipe_category]
+  field_tags: [node__recipeField_tags]
+}
+
+type node__page implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__nid: Int
+  drupal_internal__vid: Int
+  langcode: String
+  revision_timestamp: Date @dateformat
+  status: Boolean
+  title: String
+  created: Date @dateformat
+  changed: Date @dateformat
+  promote: Boolean
+  sticky: Boolean
+  default_langcode: Boolean
+  moderation_state: String
+  path: node__pagePath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  body: node__pageBody
+  relationships: node__pageRelationships
+  node_type: node__pageNode_type
+  revision_uid: node__pageRevision_uid
+  uid: node__pageUid
+}
+
+type node__coffee implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__nid: Int
+  drupal_internal__vid: Int
+  langcode: String
+  revision_timestamp: Date @dateformat
+  status: Boolean
+  title: String
+  created: Date @dateformat
+  changed: Date @dateformat
+  promote: Boolean
+  sticky: Boolean
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  path: node__coffeePath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  body: node__coffeeBody
+  field_title: node__coffeeField_title
+  relationships: node__coffeeRelationships
+  node_type: node__coffeeNode_type
+  revision_uid: node__coffeeRevision_uid
+  uid: node__coffeeUid
+  field_image: node__coffeeField_image
+}
+
+type node__article implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__nid: Int
+  drupal_internal__vid: Int
+  langcode: String
+  revision_timestamp: Date @dateformat
+  status: Boolean
+  title: String
+  created: Date @dateformat
+  changed: Date @dateformat
+  promote: Boolean
+  sticky: Boolean
+  default_langcode: Boolean
+  moderation_state: String
+  path: node__articlePath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  body: node__articleBody
+  relationships: node__articleRelationships
+  node_type: node__articleNode_type
+  revision_uid: node__articleRevision_uid
+  uid: node__articleUid
+  field_media_image: node__articleField_media_image
+  field_tags: [node__articleField_tags]
+}
+
+type menu__menu implements Node @dontInfer {
+  drupal_id: String
+  label: String
+}
+
+type media_type__media_type implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  label: String
+  relationships: media_type__media_typeRelationships
+}
+
+type media__image implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__mid: Int
+  drupal_internal__vid: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  name: String
+  created: Date @dateformat
+  changed: Date @dateformat
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  path: media__imagePath
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  relationships: media__imageRelationships
+  bundle: media__imageBundle
+  uid: media__imageUid
+  thumbnail: media__imageThumbnail
+  field_media_image: media__imageField_media_image
+}
+
+type file__file implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__fid: Int
+  langcode: String
+  filename: String
+  uri: file__fileUri
+  filemime: String
+  filesize: Int
+  status: Boolean
+  created: Date @dateformat
+  changed: Date @dateformat
+  relationships: file__fileRelationships
+  localFile: File @link(by: "id", from: "localFile___NODE")
+  uid: file__fileUid
+}
+
+type date_format__date_format implements Node @dontInfer {
+  drupal_id: String
+  label: String
+}
+
+type contact_form__contact_form implements Node @dontInfer {
+  drupal_id: String
+  langcode: String
+  status: Boolean
+  drupal_internal__id: String
+  label: String
+  recipients: [String]
+  reply: String
+  weight: Int
+  message: String
+  redirect: String
+}
+
+type block_content__footer_promo_block implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__id: Int
+  drupal_internal__revision_id: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  info: String
+  changed: Date @dateformat
+  reusable: Boolean
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  content_translation_created: Date @dateformat
+  field_content_link: block_content__footer_promo_blockField_content_link
+  field_summary: String
+  field_title: String
+  relationships: block_content__footer_promo_blockRelationships
+  block_content_type: block_content__footer_promo_blockBlock_content_type
+  content_translation_uid: block_content__footer_promo_blockContent_translation_uid
+  field_media_image: block_content__footer_promo_blockField_media_image
+}
+
+type block_content__disclaimer_block implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__id: Int
+  drupal_internal__revision_id: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  info: String
+  changed: Date @dateformat
+  reusable: Boolean
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  content_translation_created: Date @dateformat
+  field_copyright: block_content__disclaimer_blockField_copyright
+  field_disclaimer: block_content__disclaimer_blockField_disclaimer
+  relationships: block_content__disclaimer_blockRelationships
+  block_content_type: block_content__disclaimer_blockBlock_content_type
+  content_translation_uid: block_content__disclaimer_blockContent_translation_uid
+}
+
+type block_content__banner_block implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  drupal_internal__id: Int
+  drupal_internal__revision_id: Int
+  langcode: String
+  revision_created: Date @dateformat
+  status: Boolean
+  info: String
+  changed: Date @dateformat
+  reusable: Boolean
+  default_langcode: Boolean
+  revision_translation_affected: Boolean
+  content_translation_source: String
+  content_translation_outdated: Boolean
+  content_translation_created: Date @dateformat
+  field_content_link: block_content__banner_blockField_content_link
+  field_summary: String
+  field_title: String
+  relationships: block_content__banner_blockRelationships
+  block_content_type: block_content__banner_blockBlock_content_type
+  content_translation_uid: block_content__banner_blockContent_translation_uid
+  field_media_image: block_content__banner_blockField_media_image
+}
+
+type block__block implements Node @derivedTypes @dontInfer {
+  drupal_id: String
+  langcode: String
+  status: Boolean
+  dependencies: block__blockDependencies
+  drupal_internal__id: String
+  theme: String
+  region: String
+  weight: Int
+  plugin: String
+  settings: block__blockSettings
+  visibility: block__blockVisibility
+}
+
+type user__userRelationships {
+  node__article: [node__article] @link(by: "id", from: "node__article___NODE")
+  node__recipe: [node__recipe] @link(by: "id", from: "node__recipe___NODE")
+  node__page: [node__page] @link(by: "id", from: "node__page___NODE")
+  file__file: [file__file] @link(by: "id", from: "file__file___NODE")
+  node__coffee: [node__coffee] @link(by: "id", from: "node__coffee___NODE")
+  block_content__banner_block: [block_content__banner_block] @link(by: "id", from: "block_content__banner_block___NODE")
+  block_content__disclaimer_block: [block_content__disclaimer_block] @link(by: "id", from: "block_content__disclaimer_block___NODE")
+  block_content__footer_promo_block: [block_content__footer_promo_block] @link(by: "id", from: "block_content__footer_promo_block___NODE")
+  media__image: [media__image] @link(by: "id", from: "media__image___NODE")
+  taxonomy_term__recipe_category: [taxonomy_term__recipe_category] @link(by: "id", from: "taxonomy_term__recipe_category___NODE")
+  taxonomy_term__tags: [taxonomy_term__tags] @link(by: "id", from: "taxonomy_term__tags___NODE")
+}
+
+type taxonomy_term__tagsPath {
+  alias: String
+  pid: Int
+  langcode: String
+}
+
+type taxonomy_term__tagsRelationships {
+  node__article: [node__article] @link(by: "id", from: "node__article___NODE")
+  node__recipe: [node__recipe] @link(by: "id", from: "node__recipe___NODE")
+  content_translation_uid: user__user @link(by: "id", from: "content_translation_uid___NODE")
+}
+
+type taxonomy_term__tagsVid {
+  drupal_internal__target_id: String
+}
+
+type taxonomy_term__tagsContent_translation_uid {
+  drupal_internal__target_id: Int
+}
+
+type taxonomy_term__recipe_categoryPath {
+  alias: String
+  pid: Int
+  langcode: String
+}
+
+type taxonomy_term__recipe_categoryRelationships {
+  node__recipe: [node__recipe] @link(by: "id", from: "node__recipe___NODE")
+  content_translation_uid: user__user @link(by: "id", from: "content_translation_uid___NODE")
+}
+
+type taxonomy_term__recipe_categoryVid {
+  drupal_internal__target_id: String
+}
+
+type taxonomy_term__recipe_categoryContent_translation_uid {
+  drupal_internal__target_id: Int
+}
+
+type search_page__search_pageDependencies {
+  module: [String]
+}
+
+type node_type__node_typeDependencies {
+  module: [String]
+}
+
+type node_type__node_typeRelationships {
+  node__page: [node__page] @link(by: "id", from: "node__page___NODE")
+  node__coffee: [node__coffee] @link(by: "id", from: "node__coffee___NODE")
+  node__article: [node__article] @link(by: "id", from: "node__article___NODE")
+  node__recipe: [node__recipe] @link(by: "id", from: "node__recipe___NODE")
+}
+
+type node_type__node_typeThird_party_settings @derivedTypes {
+  menu_ui: node_type__node_typeThird_party_settingsMenu_ui
+}
+
+type node_type__node_typeThird_party_settingsMenu_ui {
+  available_menus: [String]
+  parent: String
+}
+
+type node__recipePath {
+  alias: String
+  pid: Int
+  langcode: String
+}
+
+type node__recipeField_recipe_instruction {
+  value: String
+  format: String
+  processed: String
+}
+
+type node__recipeField_summary {
+  value: String
+  format: String
+  processed: String
+}
+
+type node__recipeRelationships {
+  node_type: node_type__node_type @link(by: "id", from: "node_type___NODE")
+  revision_uid: user__user @link(by: "id", from: "revision_uid___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+  field_media_image: media__image @link(by: "id", from: "field_media_image___NODE")
+  field_recipe_category: [taxonomy_term__recipe_category] @link(by: "id", from: "field_recipe_category___NODE")
+  field_tags: [taxonomy_term__tags] @link(by: "id", from: "field_tags___NODE")
+}
+
+type node__recipeNode_type {
+  drupal_internal__target_id: String
+}
+
+type node__recipeRevision_uid {
+  drupal_internal__target_id: Int
+}
+
+type node__recipeUid {
+  drupal_internal__target_id: Int
+}
+
+type node__recipeField_media_image {
+  drupal_internal__target_id: Int
+}
+
+type node__recipeField_recipe_category {
+  drupal_internal__target_id: Int
+}
+
+type node__recipeField_tags {
+  drupal_internal__target_id: Int
+}
+
+type node__pagePath {
+  alias: String
+  pid: Int
+  langcode: String
+}
+
+type node__pageBody {
+  value: String
+  format: String
+  processed: String
+}
+
+type node__pageRelationships {
+  node_type: node_type__node_type @link(by: "id", from: "node_type___NODE")
+  revision_uid: user__user @link(by: "id", from: "revision_uid___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+}
+
+type node__pageNode_type {
+  drupal_internal__target_id: String
+}
+
+type node__pageRevision_uid {
+  drupal_internal__target_id: Int
+}
+
+type node__pageUid {
+  drupal_internal__target_id: Int
+}
+
+type node__coffeePath {
+  langcode: String
+}
+
+type node__coffeeBody {
+  value: String
+  format: String
+  processed: String
+  summary: String
+}
+
+type node__coffeeField_title {
+  value: String
+  format: String
+  processed: String
+}
+
+type node__coffeeRelationships {
+  node_type: node_type__node_type @link(by: "id", from: "node_type___NODE")
+  revision_uid: user__user @link(by: "id", from: "revision_uid___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+  field_image: file__file @link(by: "id", from: "field_image___NODE")
+}
+
+type node__coffeeNode_type {
+  drupal_internal__target_id: String
+}
+
+type node__coffeeRevision_uid {
+  drupal_internal__target_id: Int
+}
+
+type node__coffeeUid {
+  drupal_internal__target_id: Int
+}
+
+type node__coffeeField_image {
+  alt: String
+  title: String
+  width: Int
+  height: Int
+  drupal_internal__target_id: Int
+}
+
+type node__articlePath {
+  alias: String
+  pid: Int
+  langcode: String
+}
+
+type node__articleBody {
+  value: String
+  format: String
+  processed: String
+}
+
+type node__articleRelationships {
+  node_type: node_type__node_type @link(by: "id", from: "node_type___NODE")
+  revision_uid: user__user @link(by: "id", from: "revision_uid___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+  field_media_image: media__image @link(by: "id", from: "field_media_image___NODE")
+  field_tags: [taxonomy_term__tags] @link(by: "id", from: "field_tags___NODE")
+}
+
+type node__articleNode_type {
+  drupal_internal__target_id: String
+}
+
+type node__articleRevision_uid {
+  drupal_internal__target_id: Int
+}
+
+type node__articleUid {
+  drupal_internal__target_id: Int
+}
+
+type node__articleField_media_image {
+  drupal_internal__target_id: Int
+}
+
+type node__articleField_tags {
+  drupal_internal__target_id: Int
+}
+
+type media_type__media_typeRelationships {
+  media__image: [media__image] @link(by: "id", from: "media__image___NODE")
+}
+
+type media__imagePath {
+  langcode: String
+}
+
+type media__imageRelationships {
+  bundle: media_type__media_type @link(by: "id", from: "bundle___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+  thumbnail: file__file @link(by: "id", from: "thumbnail___NODE")
+  field_media_image: file__file @link(by: "id", from: "field_media_image___NODE")
+  node__article: [node__article] @link(by: "id", from: "node__article___NODE")
+  block_content__footer_promo_block: [block_content__footer_promo_block] @link(by: "id", from: "block_content__footer_promo_block___NODE")
+  node__recipe: [node__recipe] @link(by: "id", from: "node__recipe___NODE")
+  block_content__banner_block: [block_content__banner_block] @link(by: "id", from: "block_content__banner_block___NODE")
+}
+
+type media__imageBundle {
+  drupal_internal__target_id: String
+}
+
+type media__imageUid {
+  drupal_internal__target_id: Int
+}
+
+type media__imageThumbnail {
+  alt: String
+  width: Int
+  height: Int
+  drupal_internal__target_id: Int
+}
+
+type media__imageField_media_image {
+  alt: String
+  width: Int
+  height: Int
+  drupal_internal__target_id: Int
+}
+
+type file__fileUri {
+  value: String
+  url: String
+}
+
+type file__fileRelationships {
+  media__image: [media__image] @link(by: "id", from: "media__image___NODE")
+  uid: user__user @link(by: "id", from: "uid___NODE")
+  node__coffee: [node__coffee] @link(by: "id", from: "node__coffee___NODE")
+}
+
+type file__fileUid {
+  drupal_internal__target_id: Int
+}
+
+type block_content__footer_promo_blockField_content_link {
+  uri: String
+  title: String
+}
+
+type block_content__footer_promo_blockRelationships {
+  content_translation_uid: user__user @link(by: "id", from: "content_translation_uid___NODE")
+  field_media_image: media__image @link(by: "id", from: "field_media_image___NODE")
+}
+
+type block_content__footer_promo_blockBlock_content_type {
+  drupal_internal__target_id: String
+}
+
+type block_content__footer_promo_blockContent_translation_uid {
+  drupal_internal__target_id: Int
+}
+
+type block_content__footer_promo_blockField_media_image {
+  drupal_internal__target_id: Int
+}
+
+type block_content__disclaimer_blockField_copyright {
+  value: String
+  format: String
+  processed: String
+}
+
+type block_content__disclaimer_blockField_disclaimer {
+  value: String
+  format: String
+  processed: String
+}
+
+type block_content__disclaimer_blockRelationships {
+  content_translation_uid: user__user @link(by: "id", from: "content_translation_uid___NODE")
+}
+
+type block_content__disclaimer_blockBlock_content_type {
+  drupal_internal__target_id: String
+}
+
+type block_content__disclaimer_blockContent_translation_uid {
+  drupal_internal__target_id: Int
+}
+
+type block_content__banner_blockField_content_link {
+  uri: String
+  title: String
+}
+
+type block_content__banner_blockRelationships {
+  content_translation_uid: user__user @link(by: "id", from: "content_translation_uid___NODE")
+  field_media_image: media__image @link(by: "id", from: "field_media_image___NODE")
+}
+
+type block_content__banner_blockBlock_content_type {
+  drupal_internal__target_id: String
+}
+
+type block_content__banner_blockContent_translation_uid {
+  drupal_internal__target_id: Int
+}
+
+type block_content__banner_blockField_media_image {
+  drupal_internal__target_id: Int
+}
+
+type block__blockDependencies @derivedTypes {
+  module: [String]
+  theme: [String]
+  config: [String]
+  content: [String]
+  enforced: block__blockDependenciesEnforced
+}
+
+type block__blockDependenciesEnforced {
+  module: [String]
+}
+
+type block__blockSettings {
+  id: String
+  label: String
+  label_display: String
+  provider: String
+  level: Int
+  depth: Int
+  expand_all_items: Boolean
+  status: Boolean
+  info: String
+  view_mode: String
+  page_id: String
+  primary: Boolean
+  secondary: Boolean
+  views_label: String
+  items_per_page: String
+  use_site_logo: Boolean
+  use_site_name: Boolean
+  use_site_slogan: Boolean
+}
+
+type block__blockVisibility @derivedTypes {
+  request_path: block__blockVisibilityRequest_path
+}
+
+type block__blockVisibilityRequest_path {
+  id: String
+  negate: Boolean
+  pages: String
+}
